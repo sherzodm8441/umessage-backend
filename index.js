@@ -31,7 +31,7 @@ io.on('connection', (socket) => {
 
     socket.on('userCustomId', (id) => {
         users[id] = socket.id;
-        console.log('users: ', users);
+        // console.log('users: ', users);
     })
 
 	socket.on("disconnect", () => {
@@ -39,13 +39,13 @@ io.on('connection', (socket) => {
 	});
 
 	socket.on("callUser", ({ userToCall, signalData, from, name }) => {
-        console.log('calluser',from, users[from]);
-        console.log('calluser usertocall', userToCall, users[userToCall])
+        // console.log('calluser',from, users[from]);
+        // console.log('calluser usertocall', userToCall, users[userToCall])
 		io.to(users[userToCall]).emit("callUser", { signal: signalData, from: users[from], name });
 	});
 
 	socket.on("answerCall", (data) => {
-        console.log("answercall",data.to)
+        // console.log("answercall",data.to)
 		io.to(data.to).emit("callAccepted", data.signal)
 	});
 });
